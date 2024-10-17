@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+:root {
+  --white-color: #fff;
+  /* --primary-color: ;
+  --secondary-color: ; */
+  --background-color: #ecf0f1;
+  --background-color1: #c2cbd4;
+  --text-color: #34495e;
+  --delete-color: #e73925;
+}
+
+
+.app {
+  font-family: "Courier Prime", monospace;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  margin-top: 150px;
+  font-size: 60px;
+  font-weight: 700;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  background-color: var(--background-color1);
+  border-radius: 30px;
+  padding: 30px;
+  text-decoration: none;
+}
+
+.form {
+  margin: auto;
+}
+
+.input {
+  font-family: "Courier Prime", monospace;
+  width: 400px;
+  font-size: 20px;
+  padding: 20px 30px;
+  background-color: var(--white-color);
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+
+.list {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  margin-top: 20px;
+
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-image: linear-gradient(90deg, #a1c4fd 10%, #c2e9fb 90%);
+  border-radius: 20px;
+  padding: 15px 30px;
+  width: 400px;
+}
