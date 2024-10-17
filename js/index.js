@@ -47,6 +47,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentFilter = "all";
     function filterTodos(filter) {
         currentFilter = filter;
+        allTab.classList.remove("active");
+        activeTab.classList.remove("active");
+        completedTab.classList.remove("active");
+        switch (filter) {
+            case "all":
+                allTab.classList.add("active");
+                break;
+            case "active":
+                activeTab.classList.add("active");
+                break;
+            case "completed":
+                completedTab.classList.add("active");
+                break;
+        }
         renderTodos();
     }
 
