@@ -28,10 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const li = document.createElement("li");
         li.textContent = todo.text;
         li.innerHTML = `
-        <div>
-            <input type="checkbox" ${todo.completed ? "checked" : ""}>
-            <span class="todo-text">${todo.text}</span>
-            <i class="ri-delete-bin-line"></i>
+        <div  class="todo-text">
+            <div class="todo-wrap">
+                <input type="checkbox" class="custom-checkbox"
+                ${todo.completed ? "checked" : ""}>
+                <span>${todo.text}</span>
+            </div>
+                <i class="ri-delete-bin-line"></i>
         </div>`;
 
         const checkbox = li.querySelector("input[type='checkbox']");

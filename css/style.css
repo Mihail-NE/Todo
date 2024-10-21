@@ -3,8 +3,10 @@
 :root {
     --white-color: #fff;
     --black-color: #000000;
+
     --yellow: #fcc434;
     --yellow-800: #261d08;
+
     --gray-300: #1a1a1a;
     --gray-200: #434343;
     --gray-100: #3a3a3a;
@@ -35,7 +37,6 @@
 }
 
 .title {
-
     font-size: 60px;
     font-weight: 700;
     color: var(--yellow);
@@ -81,6 +82,37 @@
     list-style: none;
     margin-top: 20px;
 }
+
+.custom-checkbox {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    appearance: none;
+    outline: none;
+    border: 1px solid var(--white-color);
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.custom-checkbox:checked{
+    border-color: var(--yellow);
+}
+.custom-checkbox:checked::before {
+    position: absolute;
+    content: "";
+    width: 12px;
+    height: 7px;
+    top: 7px;
+    left: 7.25px;
+    border-bottom: 2px solid var(--yellow);
+    border-left: 2px solid var(--yellow);
+    transform: rotate(-45deg);
+}
+
 .todo-text {
     display: flex;
     align-items: center;
@@ -88,18 +120,29 @@
     background-color: var(--gray-200);
     color: var(--white-color);
     border-radius: 20px;
-    padding: 15px 30px;
+    padding: 15px;
     width: 400px;
     transition: all 0.3s ease;
+}
+
+.todo-wrap {
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 .todo-text:hover {
     background-color: var(--gray-100);
 }
 
-.ri-delete-bin-line {
+.todo-text:hover .ri-delete-bin-line {
+    display: block;
+}
 
+.ri-delete-bin-line {
+    margin-right: 10px;
     transition: all 0.3s ease;
+    display: none;
 }
 .ri-delete-bin-line:hover {
     color: var(--delete-color);
