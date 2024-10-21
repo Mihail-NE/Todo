@@ -11,38 +11,55 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("todos", JSON.stringify(todos));
     }
 
+    function renderTodos() {
+        todoList.innerHTML = "";
+        todos.forEach((todo, index) => {
+            if (
+                currentFilter === "all" ||
+                (currentFilter === "active" && !todo.completed) ||
+                (currentFilter === "completed" && todo.completed)
+            ) {
+                addTodoToList(todo, index);
+            }
+        });
+    }
+
+    function addTodoToList(todo, index) {
+        const li = document.createElement("li");
+        li.textContent = todo.text;
+        li.innerHTML = `
+        <div>
+            <input type="checkbox" ${todo.completed ? "checked" : ""}>
+            <span class="todo-text">${todo.text}</span>
+            <i class="ri-delete-bin-line"></i>
+        </div>`;
+
+        const checkbox = li.querySelector("input[type='checkbox']");
+        checkbox.addEventListener("change", () => {
+            todos[index].completed = checkbox.checked;
+            saveTodos();
+        });
+
+        const deleteBtn = li.querySelector(".ri-delete-bin-line");
+        deleteBtn.addEventListener("click", () => {
+            todos.splice(index, 1);
+            saveTodos();
+            renderTodos();
+        });
+
+        todoList.appendChild(li);
+    }
+
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         const todoText = input.value.trim();
         if (todoText) {
-            todos.push(todoText);
+            todos.push({ text: todoText, completed: false });
             saveTodos();
             renderTodos();
             input.value = "";
         }
     });
-
-    function addTodoToList(todoText) {
-        const li = document.createElement("li");
-        li.textContent = todoText;
-        todoList.appendChild(li);
-    }
-
-    function addTodoToList(todoText) {
-        const li = document.createElement("li");
-        li.classList.add("item");
-        li.innerHTML = `
-      <span>${todoText}</span>
-      <i class="ri-delete-bin-line"></i>
-  `;
-
-        const deleteBtn = li.querySelector(".ri-delete-bin-line");
-        deleteBtn.addEventListener("click", () => {
-            li.remove();
-        });
-
-        todoList.appendChild(li);
-    }
 
     let currentFilter = "all";
     function filterTodos(filter) {
@@ -67,19 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
     allTab.addEventListener("click", () => filterTodos("all"));
     activeTab.addEventListener("click", () => filterTodos("active"));
     completedTab.addEventListener("click", () => filterTodos("completed"));
-
-    function renderTodos() {
-        todoList.innerHTML = "";
-        todos.forEach((todo, index) => {
-            if (
-                currentFilter === "all" ||
-                (currentFilter === "active" && !todo.completed) ||
-                (currentFilter === "completed" && todo.completed)
-            ) {
-                addTodoToList(todo, index);
-            }
-        });
-    }
 
     renderTodos();
 });

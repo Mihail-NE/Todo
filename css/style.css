@@ -7,7 +7,7 @@
     --yellow-800: #261d08;
     --gray-300: #1a1a1a;
     --gray-200: #434343;
-    --gray-100: #575757;
+    --gray-100: #3a3a3a;
 
     --delete-color: #e26456;
 }
@@ -81,7 +81,7 @@
     list-style: none;
     margin-top: 20px;
 }
-.item {
+.todo-text {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -93,7 +93,7 @@
     transition: all 0.3s ease;
 }
 
-.item:hover {
+.todo-text:hover {
     background-color: var(--gray-100);
 }
 
