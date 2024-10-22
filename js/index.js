@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="todo-wrap">
                 <input type="checkbox" class="custom-checkbox"
                 ${todo.completed ? "checked" : ""}>
-                <span>${todo.text}</span>
+                <span class="todo-value">${todo.text}</span>
             </div>
                 <i class="ri-delete-bin-line"></i>
         </div>`;
@@ -50,8 +50,39 @@ document.addEventListener("DOMContentLoaded", () => {
             renderTodos();
         });
 
+        const span = li.querySelector(".todo-value");
+        span.addEventListener("dblclick", (e) => {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = todo.text;
+            input.className = "edit-input";
+
+            const saveEdit = () => {
+                const newText = input.value.trim();
+                if (newText) {
+                    todos[index].text = newText;
+                    saveTodos();
+                    renderTodos();
+                } else {
+                    span.textContent = todo.text;
+                }
+            };
+
+            input.addEventListener("blur", saveEdit);
+            input.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                    saveEdit();
+                }
+            });
+
+            span.replaceWith(input);
+            input.focus();
+        });
+
         todoList.appendChild(li);
     }
+
+    // после редактирования текста перестаёт работать кнопка удаления
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();

@@ -47,7 +47,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 500px;
+    width: 600px;
     height: auto;
     background-color: var(--gray-300);
     border-radius: 30px;
@@ -62,7 +62,7 @@
 
 .input {
     font-family: "Poppins", sans-serif;
-    width: 400px;
+    width: 500px;
     font-size: 20px;
     padding: 20px 50px;
     align-items: center;
@@ -121,11 +121,12 @@
     color: var(--white-color);
     border-radius: 20px;
     padding: 15px;
-    width: 400px;
+    width: 500px;
     transition: all 0.3s ease;
 }
 
 .todo-wrap {
+    position: relative;
     display: flex;
     gap: 20px;
     align-items: center;
@@ -146,6 +147,24 @@
 }
 .ri-delete-bin-line:hover {
     color: var(--delete-color);
+}
+
+.todo-value {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 50px;
+    width: 435px;
+    height: 60px;
+}
+
+.edit-input {
+    font-size: 16px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: var(--white-color);
+
 }
 
 .todo-filters {
