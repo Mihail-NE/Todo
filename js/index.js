@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 addTodoToList(todo, index);
             }
         });
+        showFooter();
     }
 
     function addTodoToList(todo, index) {
@@ -82,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         todoList.appendChild(li);
     }
 
-    // после редактирования текста перестаёт работать кнопка удаления
+
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -118,6 +119,13 @@ document.addEventListener("DOMContentLoaded", () => {
     allTab.addEventListener("click", () => filterTodos("all"));
     activeTab.addEventListener("click", () => filterTodos("active"));
     completedTab.addEventListener("click", () => filterTodos("completed"));
+
+
+    function showFooter() {
+        const footer = document.getElementById("todo-filters");
+        footer.style.display = todos.length > 0 ? "flex" : "none";
+        todoList.style.display = todos.length > 0 ? "flex" : "none";
+    }
 
     renderTodos();
 });
