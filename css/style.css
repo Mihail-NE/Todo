@@ -10,6 +10,7 @@
     --gray-300: #1a1a1a;
     --gray-200: #434343;
     --gray-100: #3a3a3a;
+    --gray-50: #e5e5e5;
 
     --delete-color: #e26456;
 }
@@ -57,7 +58,29 @@
 }
 
 .form {
+    position: relative;
     margin: auto;
+}
+
+.toggle-icon::before {
+    content: '\ea4e';
+    font-family: 'remixicon';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 35px;
+    color: #9495A5;
+    cursor: pointer;
+}
+
+.all-completed::before {
+    color: var(--gray-200);
+}
+
+.completed {
+    text-decoration: line-through;
+    color: var(--gray-50);
 }
 
 .input {
@@ -98,7 +121,7 @@
     cursor: pointer;
 }
 
-.custom-checkbox:checked{
+.custom-checkbox:checked {
     border-color: var(--yellow);
 }
 .custom-checkbox:checked::before {
@@ -166,7 +189,6 @@
     background-color: transparent;
     color: var(--white-color);
     z-index: 1;
-
 }
 
 .todo-filters {

@@ -4,12 +4,23 @@ const todoList = document.getElementById("list");
 const allTab = document.getElementById("all-tab");
 const activeTab = document.getElementById("active-tab");
 const completedTab = document.getElementById("completed-tab");
+const toggleIcon = document.getElementById("toggle-icon");
+const todoValue = document.getElementById("todo-value")
 
 document.addEventListener("DOMContentLoaded", () => {
     let todos = JSON.parse(localStorage.getItem("todos")) || [];
     function saveTodos() {
         localStorage.setItem("todos", JSON.stringify(todos));
     }
+
+    toggleIcon.addEventListener("click", () => {
+        const allCompleted = todos.every((todo) => todo.completed);
+        todos.forEach((todo) => (todo.completed = !allCompleted));
+
+
+        saveTodos();
+        renderTodos();
+    });
 
     function renderTodos() {
         todoList.innerHTML = "";
@@ -23,6 +34,21 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         showFooter();
+        updateToggleIcon();
+    }
+
+    function updateToggleIcon() {
+        if (
+            currentFilter === "all" ||
+            currentFilter === "active" ||
+            currentFilter === "completed"
+        ) {
+            toggleIcon.textContent = todos.every((todo) => todo.completed)
+                ? toggleIcon.classList.add("all-completed")
+                : toggleIcon.classList.remove("all-completed")
+            toggleIcon.title = "Select All";
+        }
+
     }
 
     function addTodoToList(todo, index) {
@@ -33,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="todo-wrap">
                 <input type="checkbox" class="custom-checkbox"
                 ${todo.completed ? "checked" : ""}>
-                <span class="todo-value">${todo.text}</span>
+                <span class="todo-value ${todo.completed ? 'completed' : ''}" id="todo-value">${todo.text}</span>
             </div>
                 <i class="ri-delete-bin-line"></i>
         </div>`;
@@ -41,6 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const checkbox = li.querySelector("input[type='checkbox']");
         checkbox.addEventListener("change", () => {
             todos[index].completed = checkbox.checked;
+            const span = li.querySelector(".todo-value");
+            if (checkbox.checked) {
+                span.classList.add("completed");
+            } else {
+                span.classList.remove("completed");
+            }
             saveTodos();
         });
 
@@ -83,8 +115,6 @@ document.addEventListener("DOMContentLoaded", () => {
         todoList.appendChild(li);
     }
 
-
-
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         const todoText = input.value.trim();
@@ -119,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
     allTab.addEventListener("click", () => filterTodos("all"));
     activeTab.addEventListener("click", () => filterTodos("active"));
     completedTab.addEventListener("click", () => filterTodos("completed"));
-
 
     function showFooter() {
         const footer = document.getElementById("todo-filters");

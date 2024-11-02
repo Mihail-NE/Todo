@@ -13,12 +13,13 @@
     <body>
         <main class="app">
             <div class="header">
-                <img src="/assets/Frame 436.png">
+                <img src="/assets/Frame 436.png" />
                 <h1 class="title">Todos</h1>
             </div>
 
             <div class="main">
                 <form id="form" class="form">
+                    <span id="toggle-icon" class="toggle-icon"></span>
                     <input
                         type="text"
                         id="input"
@@ -30,10 +31,11 @@
                 <div id="todo-filters" class="todo-filters">
                     <button id="all-tab" class="all-tab">All</button>
                     <button id="active-tab" class="active-tab">Active</button>
-                    <button id="completed-tab" class="completed-tab">Completed</button>
+                    <button id="completed-tab" class="completed-tab">
+                        Completed
+                    </button>
                 </div>
             </div>
-
         </main>
 
         <script src="/js/index.js"></script>
