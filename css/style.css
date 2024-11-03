@@ -192,8 +192,18 @@
 }
 
 .todo-filters {
+    position: relative;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 30px;
     gap: 10px;
+}
+
+.todo-count {
+    color: var(--white-color);
+    font-size: 15px;
 }
 
 .all-tab,
@@ -202,7 +212,7 @@
     color: var(--yellow);
     background-color: var(--yellow-800);
     padding: 5px 15px;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -210,6 +220,27 @@
 
 .active {
     border: 1px solid var(--yellow);
+}
+
+.clear-all {
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    color: var(--white-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clear-all:hover {
+    color: var(--delete-color);
+}
+
+.todo-filters-btns {
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    display: flex;
+    gap: 10px;
 }
 
 .all-tab:hover,

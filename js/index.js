@@ -6,6 +6,8 @@ const activeTab = document.getElementById("active-tab");
 const completedTab = document.getElementById("completed-tab");
 const toggleIcon = document.getElementById("toggle-icon");
 const todoValue = document.getElementById("todo-value")
+const clearAllBtn = document.getElementById("clear-all");
+const todoCount = document.getElementById("todo-count");
 
 document.addEventListener("DOMContentLoaded", () => {
     let todos = JSON.parse(localStorage.getItem("todos")) || [];
@@ -16,10 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleIcon.addEventListener("click", () => {
         const allCompleted = todos.every((todo) => todo.completed);
         todos.forEach((todo) => (todo.completed = !allCompleted));
-
-
         saveTodos();
         renderTodos();
+        updateTodoCount();
     });
 
     function renderTodos() {
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         showFooter();
+        updateTodoCount();
         updateToggleIcon();
     }
 
@@ -49,6 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
             toggleIcon.title = "Select All";
         }
 
+    }
+
+    function updateTodoCount() {
+        const activeTodos = todos.filter(todo => !todo.completed).length;
+        todoCount.textContent = `${activeTodos} item${activeTodos !== 1 ? 's' : ''} left`;
     }
 
     function addTodoToList(todo, index) {
@@ -74,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 span.classList.remove("completed");
             }
             saveTodos();
+            updateTodoCount();
         });
 
         const deleteBtn = li.querySelector(".ri-delete-bin-line");
@@ -81,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
             todos.splice(index, 1);
             saveTodos();
             renderTodos();
+            updateTodoCount();
         });
 
         const span = li.querySelector(".todo-value");
@@ -122,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
             todos.push({ text: todoText, completed: false });
             saveTodos();
             renderTodos();
+            updateTodoCount();
             input.value = "";
         }
     });
@@ -153,8 +163,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function showFooter() {
         const footer = document.getElementById("todo-filters");
         footer.style.display = todos.length > 0 ? "flex" : "none";
+        toggleIcon.style.display = todos.length > 0 ? "flex" : "none";
         todoList.style.display = todos.length > 0 ? "flex" : "none";
     }
+
+    clearAllBtn.addEventListener("click", () => {
+        todos = [];
+        saveTodos();
+        renderTodos();
+    });
 
     renderTodos();
 });
