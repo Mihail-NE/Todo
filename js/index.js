@@ -6,7 +6,7 @@ const activeTab = document.getElementById("active-tab");
 const completedTab = document.getElementById("completed-tab");
 const toggleIcon = document.getElementById("toggle-icon");
 const todoValue = document.getElementById("todo-value")
-const clearAllBtn = document.getElementById("clear-all");
+const clearCompleted = document.getElementById("clear-completed");
 const todoCount = document.getElementById("todo-count");
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -167,8 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
         todoList.style.display = todos.length > 0 ? "flex" : "none";
     }
 
-    clearAllBtn.addEventListener("click", () => {
-        todos = [];
+    clearCompleted.addEventListener("click", () => {
+        todos = todos.filter(todo => !todo.completed);
         saveTodos();
         renderTodos();
     });
